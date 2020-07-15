@@ -1,0 +1,115 @@
+:root{
+  --size-stararm: 10px;
+  --size-starthick: 1px;
+
+  --pos-topVal: 50px;
+  --pos-leftVal: 75px;
+
+  --color-myStar: rgba(82, 179, 217, 1);
+}
+
+/* Adding the background gradient color */
+.background{
+  background-color: #2d3436;
+  background-image: radial-gradient(#2d3436 0%, #000000 74%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+/* *****ANIMATION***** */
+@keyframes glowing {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1.0;
+  }
+}
+@keyframes twinkling {
+  0%{ opacity: 0; transform: scale(1.0);}
+  25%{ opacity: 0.25; transform: scale(1.25);}
+  50%{ opacity: 0.50; transform: scale(1.5);}
+  75%{ opacity: 0.75; transform: scale(1.75);}
+  100%{ opacity: 1.0; transform: scale(2.0);}
+}
+
+/* ******STARS****** */
+.star{
+  position: fixed;
+  border-radius: 50%;
+}
+.star1{
+  height: 1.5px;
+  width: 1.5px;
+  background-color: cyan;
+  animation: glowing 1s infinite alternate ease-in-out;
+}
+.star2{
+  height: 3px;
+  width: 3px;
+  background-color: magenta;
+  animation: glowing 1s infinite alternate ease-in-out;
+}
+.star3{
+  background-color: var(--color-myStar);
+  height: 3px;
+  width: 3px;
+  z-index: 9;
+  filter: blur(2px);
+}
+
+/* *****MOON**** */
+.moon{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+
+  background-color: transparent;
+  border-radius: 50%;
+  height: 300px;
+  width: 300px;
+
+  box-shadow: -100px 0px 10px white;
+
+  z-index: 100;
+}
+
+.mainStar{
+  position: fixed;
+  display: block;
+  width: 0px;
+  height: 0px;
+
+  border-left: var(--size-stararm) solid transparent;
+  border-right: var(--size-stararm) solid transparent;
+  border-top: calc(var(--size-starthick)*2) solid var(--color-myStar);
+  top: var(--pos-topVal);
+  left: var(--pos-leftVal);
+
+  filter: blur(1px);
+  z-index: -1;
+  animation: twinkling 1s infinite alternate ease-in-out;
+}
+
+.mainStar:before,
+.mainStar:after{
+  content: " ";
+  display: block;
+  position: relative;
+  width: 0px;
+  height: 0px;
+}
+.mainStar:before{
+  border-left: var(--size-starthick) solid transparent;
+  border-right: var(--size-starthick) solid transparent;
+  border-top: var(--size-stararm) solid var(--color-myStar);
+  top: calc(- var(--size-starthick));
+  left: calc(var(--pos-leftVal)- var(--size-starthick)+var(--size-stararm));
+}
+
+.mainStar:after{
+  border-left: var(--size-starthick) solid transparent;
+  border-right: var(--size-starthick) solid transparent;
+  border-bottom: var(--size-stararm) solid var(--color-myStar);
+  top: calc(var(--size-stararm) * -2 + var(--size-starthick) * -2);
+  left: calc(var(--pos-leftVal)- var(--size-starthick)+var(--size-stararm));
+}
